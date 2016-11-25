@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style type="text/css">
+		div{
+			width:60px;
+	height:60px;
+	background-color: red;
+	color: white;
+	font-weight: bold;
+	font-size: 18px;
+	line-height: 60px;
+	text-align: center;
+	float: left;
+	margin-left:10px;
+	cursor: pointer;
+}
+	</style>
+</head>
+<body>
+
+<input type="text" name="text" id="t">
+	<input type="button" name="" value="左侧入" id="left_add">
+	<!-- 将inout中的数从左侧插入 -->
+	<input type="button" name="button" value="右侧入" id="right_add">
+	<!-- 将inout中的数从右侧插入 -->
+	<input type="button" name="button" value="左侧出" id="left_remove">
+	<!-- 读取并删除队列左侧第一个元素，并弹窗显示元素中数值 -->
+	<input type="button" name="button" value="右侧出" id="right_remove">
+	<!-- 读取并删除队列右侧第一个元素，并弹窗显示元素中数值 -->
+	<div id="box"></div>
+
+</body>
+<script type="text/javascript">
+	var wenben = document.querySelector('#t');
+	var zuojia = document.querySelector('#left_add');
+	var youjia = document.querySelector('#right_add');
+	var zuochu = document.querySelector('#left_remove');
+	var youchu = document.querySelector('#right_remove');
+	var box = document.querySelector('#box');
+	var x = box.childNodes;
+	function leftAdd(){
+		if(wenben.value === "") return false;
+		var newdiv = document.createElement("div");
+		newdiv.innerHTML = wenben.value;
+		newdiv.setAttribute("class","div1");
+		newdiv.addEventListener("click",function(){
+			box.removeChild(this);
+		},true);
+		box.insertBefore(newdiv,box.firstChild);
+		wenben.value = "";
+
+	}
+	function rightAdd(){
+		if(wenben.value === "") return false;
+		var newdiv = document.createElement("div");
+		newdiv.innerHTML = wenben.value;
+		newdiv.setAttribute("class","div1");
+		newdiv.addEventListener("click",function(){
+			box.removeChild(this);
+		},true);
+		box.appendChild(newdiv);
+		wenben.value = "";
+
+	}
+	function leftRemove(){
+		if(box.childNodes.length === 0) return false;
+		var x = box.removeChild(box.firstChild);
+		alert(x.innerHTML);
+
+	}
+	function rightRemove(){
+		if(box.childNodes.length === 0)return false;
+		var x = box.removeChild(box.lastChild);
+
+	}
+	left_add.addEventListener("click",leftAdd,true);
+	right_add.addEventListener("click",rightAdd,true);
+	left_remove.addEventListener("click",leftRemove,true);
+	right_remove.addEventListener("click",rightRemove,true);
+
+</script>
+</html>
